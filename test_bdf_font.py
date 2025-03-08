@@ -4,6 +4,7 @@ import bdfparser
 
 def main():
     # 本例使用字型檔為全形 12x12, 半形 6x12 的像素字型
+    # 但所有的字都是用 12x12 點陣圖表示
     font = bdfparser.Font("./fonts/fusion-pixel-12px-monospaced-zh_hant.bdf")
 
     while True:
