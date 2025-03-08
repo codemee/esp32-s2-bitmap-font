@@ -31,7 +31,21 @@
 
 ## MicroPython 使用方法
 
-請先把 `lib` 資料夾的內容上傳到 ESP32-S2 開發板上，即可匯入 `bitmap_font_tool` 模組，可參考 `oled.py`：
+請先把 `lib` 資料夾的內容上傳到 ESP32-S2 開發板上，即可匯入 `bitmap_font_tool` 模組，它提供以下的通用函式：
+
+|函式|說明|
+|---|---|
+|set_font_path(path)|設定字型檔的路徑，字型檔在 lib\fonts 下|
+|get_bitmap(ch)|取得指定字元的點陣圖位元組資料|
+
+上述函式的基本用法可參考範例檔 `test_bitmap_font.py`。以下則是專為 MicroPython 設計的函式：
+
+|函式|說明|
+|---|---|
+|draw_bitmap(oled, bitmap, x, y)|在 oled 控制的螢幕上 (x,y) 位置繪製點陣圖 bitmap|
+|draw_text(oled, text, x, y)|在 oled 控制的螢幕上 (x,y) 位置繪製，它會自動折行，也可以使用 `\n` 強迫換行，或是用 `\r` 回到同一行左邊的行開頭
+
+範例可參考 `oled.py`：
 
 ```python
 # 安裝模組
@@ -41,40 +55,22 @@
 
 from ssd1306 import SSD1306_I2C
 from machine import SoftI2C, Pin
-from framebuf import FrameBuffer, MONO_HLSB, MONO_HMSB
-from bitmap_font_tool import set_font_path, get_bitmap
+from bitmap_font_tool import (
+    set_font_path,
+    get_bitmap,
+    draw_ch,
+    draw_text
+)
 
 i2c = SoftI2C(scl=Pin(9), sda=Pin(8))
 oled = SSD1306_I2C(128, 64, i2c)
 
-# 在 oled 指定位置繪製單一字元
-def draw_ch(oled, bitmap, x, y):
-    width = 8 if len(bitmap) == 12 else 16 
-    height = 12
-    pic_array = bytearray(bitmap) # 轉換成位元組陣列
-    frame = FrameBuffer(          # 建立影格
-        pic_array,                         
-        width,
-        height,
-        MONO_HLSB # 單色圖形、每個位元組代表水平排列的 8 個像素、最高位元是最左邊的點
-    )
-    oled.blit(frame, x, y) # 繪製圖形
-
-
 set_font_path('./lib/fonts/fusion_bdf.12')
 
-x = 0
-y = 16
-text = '旗標科技超厲害★'
-for c in text:
-    if c == '\n':
-        y += 12
-        x = 0
-        continue
-    bitmap = get_bitmap(c)
-    
-    draw_ch(oled, bitmap, x, y)
-    x += 6 if len(bitmap) == 12 else 12
+draw_text(oled, '┌─╭太帥了！╮─┐', 0, 16)
+draw_text(oled, '╘═ㄊ►°℉℃θ═╛', 0, 28)
+draw_text(oled, '到地府走一趟才發現\n連閻羅王都會 Python！', 0, 40)
+draw_text(oled, '你看不見\r可以用\\r和\\n', 0, 0)
 oled.show()
 ```
 
