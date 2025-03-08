@@ -2,7 +2,7 @@
 
 為了使用 ESP32-S2 在 OLED 上顯示中文字，原本的想法是使用古時候倚天的中文字型檔，雖然可行，但因為字型需要額外授權，所以做罷（國喬中文似乎可以免費使用，但現在也找不到字型檔）。不過剛好在趙英傑老師的《[超圖解 Arduino 互動設計入門 第五版](https://www.flag.com.tw/books/product/F5799)》看到[Fusion Pixel Font](https://fusion-pixel-font.takwolf.com/) 提供了開源的字體，雖然最大只有 12x12，美觀程度上比不上倚天字型，不過在小小的 OLED 上顯示也是剛好，因此就採用此字型檔處理過後讓 ESP32-S2 使用。
 
-由於我的主要目的是顯示繁體中文，因此就以該字型中的 `fusion-pixel-12px-monospaced-zh_hant.bdf` 為主，不過它採用 [BDF](https://font.tomchen.org/bdf_spec/) 格式，耗費空間，因此我仿照倚天中文字形的方式，將原本的 BDF 處理之後，轉成點陣圖的位元資料依照 UTF16 編碼放置，並且參考倚天中文的 big5 編碼範圍，只放置我需要的字元後客製成單一字型檔，這個字型檔的結構如下：
+由於我的主要目的是顯示繁體中文，因此就以該字型中的 `fusion-pixel-12px-monospaced-zh_hant.bdf` 為主，不過它採用 [BDF](https://font.tomchen.org/bdf_spec/) 格式，耗費空間，因此我仿照倚天中文字形的方式，將原本的 BDF 處理之後，轉成點陣圖的位元資料依照 UTF16 編碼放置，並且參考倚天中文的 [big5](https://www.ifreesite.com/big5.htm) 編碼範圍，只放置我需要的字元後客製成單一字型檔，這個字型檔的結構如下：
 
 |字元範圍|字型大小|位元組數|說明|
 |---|---|---|---|
