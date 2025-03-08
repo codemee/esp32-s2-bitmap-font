@@ -29,17 +29,14 @@ set_font_path('./lib/fonts/fusion_bdf.12')
 
 x = 0
 y = 16
-text = '天氣真好！\nGo→玩A'
+text = '旗標科技超厲害★'
 for c in text:
     if c == '\n':
-        y += 25
+        y += 12
         x = 0
         continue
     bitmap = get_bitmap(c)
     
     draw_ch(oled, bitmap, x, y)
-    x += 8 if len(bitmap) == 12 else 16
+    x += 6 if len(bitmap) == 12 else 12
 oled.show()
-
-
-
