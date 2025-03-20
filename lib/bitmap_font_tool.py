@@ -65,6 +65,9 @@ if 'MicroPython' in sys.version:
                 x = 0
                 continue
             bitmap = get_bitmap(c)
+            if bitmap is None:
+                bitmap = get_bitmap('☒')
+                print(f"'{c}' not found in font file.")
             x_next = x + (6 if len(bitmap) == 12 else 12)
             if x_next >= 128:
                 y += 12

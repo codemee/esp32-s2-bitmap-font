@@ -14,6 +14,9 @@ def main():
         for ch in text:
             print("-" * 20)
             glyph = font.glyph(ch)
+            if glyph is None:
+                print(f"'{ch}' not found in font file.")
+                continue
             bitmap = glyph.draw()        # 取得點陣圖位元資料
             print(bitmap)                # 顯示點陣圖位元資料
             bitmap = bitmap.bytepad(8)   # 將點陣圖位元資料補齊到 8 的倍數
