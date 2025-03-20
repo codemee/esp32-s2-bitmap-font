@@ -20,7 +20,7 @@ def get_bitmap(ch):
         print("Font file not loaded.")
         return None
     code = ord(ch)
-    if code < 0x7E:
+    if code <= 0x7E:
         f.seek((code - 0x20) * 12)
         return f.read(12)
     offset = (0x7f - 0x20) * 12

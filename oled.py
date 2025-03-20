@@ -13,7 +13,7 @@ from bitmap_font_tool import (
 i2c = SoftI2C(scl=Pin(9), sda=Pin(8))
 oled = SSD1306_I2C(128, 64, i2c)
 
-set_font_path('./lib/fonts/fusion_bdf.12')
+set_font_path('./fonts/fusion_bdf.12')
 
 draw_text(oled, '┌─╭太帥了！╮─┐', 0, 16)
 draw_text(oled, '╘═ㄊ►°℉℃θ═╛', 0, 28)
