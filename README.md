@@ -7,7 +7,7 @@
 |字元範圍|字型大小|位元組數|說明|
 |---|---|---|---|
 |0x32~0x7E|6x12|12|半形英數字符號，每列補白成 8 個像素|
-|0x00A2~0x2642|12x12|24|全形字，每列補白成 16 個像素|
+|0x00A1~0x266F|12x12|24|全形字，每列補白成 16 個像素|
 |0x3000~0x33E0|12x12|24|全形字，每列補白成 16 個像素|
 |0x4E00~0x9FA4|12x12|24|全形字，每列補白成 16 個像素|
 |0xFE10~0xFFE3|12x12|24|全形字，每列補白成 16 個像素|
@@ -26,7 +26,9 @@
 |test_bdf_font.py|測試原始的 BDF 字型檔，可以顯示個別字元的樣子|
 |test_bitmap_font.py|`bitmap_font_tool.py` 以及客製字型檔的測試程式|
 |tools\make_bitmap_font.py|用來製作客製字型檔的工具程式|
-|tools\checkrange.py|製作客製字型檔的輔助工具，用來檢查需要涵蓋的 UTF16 範圍，減少客製字型檔的大小|
+|tools\checkrange.py|製作客製字型檔的輔助工具，用來檢查涵蓋 BIG5 編碼需要對應的 UTF16 範圍，減少客製字型檔的大小|
+|tools\show_bdf_font_range.py|用來檢查 bdf 檔裡面涵蓋的 UTF16 範圍，並統計字數|
+|tools\ranges.txt|上個工具的結果，供調整 make_bitmao_font.py 所需涵蓋的 UTF16 範圍|
 |oled.py|MicroPython 範例|
 
 ## MicroPython 使用方法

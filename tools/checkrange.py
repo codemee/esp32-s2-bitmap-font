@@ -8,7 +8,7 @@ big5_tables = [
     (0xFA0C, 0xFFE3)
 ]
 
-with open('fusion-pixel-12px-monospaced-zh_hant.bdf') as f:
+with open('../fonts/fusion-pixel-12px-monospaced-zh_hant.bdf') as f:
     item = 0
     in_block = False
     prev_code = -1
