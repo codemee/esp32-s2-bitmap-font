@@ -10,21 +10,7 @@ print(parent_dir)
 font = bdfparser.Font(f"{parent_dir}/../fonts/fusion-pixel-12px-monospaced-zh_hant.bdf")
 sys.path.append(f'{parent_dir}/../lib')
 
-
-# 客製字型檔開頭會放 ASCII 32~126 的英數字符號，以 8x12 像素表示
-# 接著放置以下這些涵蓋 big5 字元範圍的 UTF16 字元，以 12x12 像素表示
-#   (0x00A2, 0x2642),
-#   (0x3000, 0x33D5),
-#   (0x4E00, 0x9FA4),
-#   (0xFA0C, 0xFFE3)
-# 不過實際上 fusion 字型中有缺字，所以調整後的 UTF16 字元範圍如下表
-# 這些範圍中還是有許多缺字，但不是連續大範圍，這裡採簡易作法，缺字就填 0
-# utf16_tables = [
-#     (0x00A2, 0x2642),
-#     (0x3000, 0x33E0),
-#     (0x4E00, 0x9FA4),
-#     (0xFE10, 0xFFE3),
-# ]
+# 匯入要製作的字型檔 UTF6 範圍表格
 from bitmap_font_tool import utf16_tables
 
 with open('../lib/fonts/fusion_bdf.12', 'wb') as f:
